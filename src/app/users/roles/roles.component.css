@@ -1,0 +1,13 @@
+
+/deep/.ui-growl {
+    top:55px;
+}
+
+form {
+    font-size: 12px;
+}
+
+form>.btns, .cont-icon{
+    text-align: right;
+    margin-right: 10px;
+}

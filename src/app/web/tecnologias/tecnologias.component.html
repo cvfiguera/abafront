@@ -1,0 +1,36 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-8 col-lg-8">
+                <div class= "form-group">
+                    <label for= "nombre" class="control-label col-md-4 col-lg-4">Nombre Tecnología</label>
+                    <div class="col-md-8 col-lg-8">
+                        <input class="form-control input-sm" type="text" name="nombre" #nombre />
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-warning btn-sm" type="button" name="new" (click)="newRowData()" data-toggle="modal" data-target="#myModal"> Nuevo</button>
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="loadDataFiltered(nombre)"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+       <p-dataTable [value]="data" [rows]="rows" sortField = "nombre" [paginator]="true" [responsive]="true">
+            <p-column field= "nombre" header="Nombre Tecnologia"  [style]="{'width':'45%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "observacion" header="Observación" [style]="{'width':'45%', 'font-size': '12px'}"></p-column>
+            <p-column styleClass="col-button" [style]="{'width':'10%', 'text-align': 'center'}">
+                <ng-template pTemplate="header"></ng-template>
+                <ng-template let-tecnologia="rowData" pTemplate="body">
+                    <button type="button" (click)="editRowData(tecnologia)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></button>
+                    <button type="button" (click)="deleteRowData(tecnologia)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+<tecnologias-form [title] = "titleAction" [tecnologia]="tecnologia" (close)="onClose($event)"></tecnologias-form>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>
+<p-confirmDialog header="Eliminar registro" icon="fa fa-question-circle" width="425"></p-confirmDialog>

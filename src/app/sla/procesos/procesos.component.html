@@ -1,0 +1,63 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+             <div class="col-lg-6">
+                 <div class= "form-group">
+                    <label for= "fechaIni" class="control-label col-md-3 col-lg-3">Fecha Inicial</label>
+                    <div class="col-md-9 col-lg-9">
+                        <input class="form-control input-sm" type="date" name="fechaIni" #fechaIni />
+                    </div>
+                </div>
+             </div>
+             <div class="col-lg-6">
+                <div class= "form-group">
+                    <label class= "control-label col-md-3 col-lg-3" for= "fechaFin">Fecha Final</label>
+                    <div class="col-md-9 col-lg-9">
+                        <input class="form-control input-sm" type="date" name="fechaFin" #fechaFin />
+                    </div>
+                </div>
+             </div>
+            <div class="btns">
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="loadData(fechaIni, fechaFin)"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+       <p-dataTable [value]="data" [rows]="10" [paginator]="true" [responsive]="true">
+            <p-column field= "proceso" header="Tipo Proceso"  [style]="{'width':'18%','font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "usuario" header="Usuario"  [style]="{'width':'12%','font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "operadora" header="Operadora"  [style]="{'width':'33%','font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column styleClass="col-button" [sortable]="true" [style]="{'width':'12%','font-size': '12px'}">
+                <ng-template pTemplate="header">Período</ng-template>
+                <ng-template let-proceso="rowData" pTemplate="body">
+                    {{ getMes(proceso.mes) + " - " + proceso.ano}}
+                </ng-template>
+            </p-column>
+            <p-column field= "fecha" header="Fecha"  [style]="{'width':'10%','font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column styleClass="col-button" [sortable]="true" [style]="{'width':'10%','font-size': '12px'}">
+                <ng-template pTemplate="header">Estado</ng-template>
+                <ng-template let-proceso="rowData" pTemplate="body">
+                    {{ proceso.estado==1?'Activo':'Inactivo'}}
+                </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" [style]="{'width':'5%', 'text-align': 'center'}">
+                <ng-template pTemplate="header"></ng-template>
+                <ng-template let-proceso="rowData" pTemplate="body">
+                    <button type="button" (click)="getDetalle(proceso)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Ver detalles"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+        <br/>
+        <span class="titulo2">Detalle de Proceso:</span>
+        <p-dataTable [value]="dataDetail" rows="10" [paginator]="true" [responsive]="true">
+            <p-column field="tipo" header="Tipo Archivo"  [style]="{'width':'23%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="nombre" header="Nombre Archivo"  [style]="{'width':'40%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="version" header="Versión"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="estado" header="Estatus"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+         </p-dataTable>
+    </div>
+</div>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>

@@ -1,0 +1,105 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <form class="form-horizontal">
+        <div class="col-md-6 col-lg-6">
+            <div class= "form-group">
+                <label for= "rut" class="control-label col-md-3 col-lg-3">RUT</label>
+                <div class="col-md-9 col-lg-9">
+                    <input type="text" name="rut" class= "form-control input-sm" disabled required="required" [(ngModel)]= "usuario.rut" pattern="[0-9]{7,8}-[0-9Kk]{1}">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class= "form-group">
+                <label for= "usuario" class="control-label col-md-3 col-lg-3">Usuario:</label>
+                <div class="col-md-9 col-lg-9">
+                   <input type="text" class= "form-control input-sm" required="required" name="usuario" [(ngModel)]= "usuario.username" maxlength="15">
+                </div>
+            </div>
+          </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "nombre" class="control-label col-md-3 col-lg-3">Nombre:</label>
+              <div class="col-md-9 col-lg-9">
+                 <input type="text" class= "form-control input-sm" required="required" name="nombre"  [(ngModel)]= "usuario.nombre" />
+                </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6"> 
+          <div class= "form-group">
+              <label for= "apellido" class="control-label col-md-3 col-lg-3">Apellido:</label>
+              <div class="col-md-9 col-lg-9">
+                 <input type="text" class= "form-control input-sm" required="required" name="apellido" [(ngModel)]= "usuario.apellido">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "organizacion" class="control-label col-md-3 col-lg-3">Organización:</label>
+              <div class="col-md-9 col-lg-9">
+                 <input type="text" class= "form-control input-sm" disabled required="required" name="organizacion" [(ngModel)]= "usuario.organizacion">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "rol" class="control-label col-md-3 col-lg-3">Rol:</label>
+              <div class="col-md-9 col-lg-9">
+                 <input type="text" class= "form-control input-sm" disabled required="required" name="rol" [(ngModel)]= "usuario.rol">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "telefono" class="control-label col-md-3 col-lg-3">Teléfono:</label>
+              <div class="col-md-9 col-lg-9">
+                 <input type="text" class= "form-control input-sm" required="required" name="telefono" [(ngModel)]= "usuario.telefono">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "email" class="control-label col-md-3 col-lg-3">Email:</label>
+              <div class="col-md-9 col-lg-9">
+                 <input type="text" class= "form-control input-sm" required="required" name="email" [(ngModel)]= "usuario.email">
+              </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class= "form-group">
+              <div class= "checkbox">
+                  <label for= "cambiar" class="control-label">
+                      <input type="checkbox" [(ngModel)] = "cambiar" (click) = "cambiarPass()" name="cambiar" ng />Cambiar contraseña:</label>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-12">
+            <div class= "form-group">
+                <label for= "pass" class="control-label col-md-2 col-lg-2">Contraseña actual:</label>
+                <div class="col-md-4 col-lg-4">
+                   <input type="password" class= "form-control input-sm" required="required" [disabled] = "!cambiar" [(ngModel)]= "usuario.pass" name="pass"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "newpass" class="control-label col-md-4 col-lg-4">Nueva contraseña:</label>
+              <div class="col-md-8 col-lg-8">
+                 <input type="password" class= "form-control input-sm" required="required" [disabled] = "!cambiar" [(ngModel)]= "usuario.newpass" name="newpass"/>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class= "form-group">
+              <label for= "repass" class="control-label col-md-4 col-lg-4">Confirmar contraseña:</label>
+              <div class="col-md-8 col-lg-8">
+                 <input type="password" class= "form-control input-sm" required="required" [disabled] = "!cambiar" [(ngModel)]= "usuario.repass" name="repass">
+              </div>
+          </div>
+        </div>
+        <div class="btns">
+            <button class="btn btn-primary btn-sm" type="submit" name="actualizar" [disabled]="bloqueado" (click)="actualizar()"> Actualizar</button>
+        </div>
+      </form>   
+</div>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>

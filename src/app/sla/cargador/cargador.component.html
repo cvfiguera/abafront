@@ -1,0 +1,97 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "operadora" class="control-label col-md-2 col-lg-2">Operadora</label>
+                    <div class="col-md-10 col-lg-10">
+                        <select [(ngModel)]= "filtro.operadora" name="operadora" class="form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let operadora of operadoras" [value]="operadora.id">{{operadora.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "month" class="control-label col-md-3 col-lg-3">Mes</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]= "filtro.mes" name= "month" class= "form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let month of months" [value]="month.id">{{month.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "year" class="control-label col-md-3 col-lg-3">Año</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]="filtro.year" name="year" class="form-control input-sm">
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let year of years" [value]="year.id">{{year.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary btn-sm" type="button" name="search" [disabled]="bloqueado" (click)="getFiles()"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+        <p-dataTable [value]="data" rows="10" sortField = "nombre" [paginator]="true" [responsive]="true"
+            [selectionMode]="selectionMode" [(selection)]="processData" [expandableRows]="true">
+            <p-column expander="true" styleClass="col-icon" [style]="{'width':'5%'}"></p-column>
+            <p-column field="tipo" header="Tipo Archivo"  [style]="{'width':'23%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="nombre" header="Nombre Archivo"  [style]="{'width':'40%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="version" header="Versión"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="estado" header="Estatus"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'35px', 'text-align': 'center'}" [selectionMode]="selectionMode"></p-column>
+            <ng-template let-archivo pTemplate="rowexpansion">
+                <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px">
+                    <div class="ui-grid-row">
+                        <table class="tab-detail">
+                            <tr *ngFor="let estado of archivo.historial">
+                                <td width="5%"></td>
+                                <td width="40%">
+                                    {{ estado.nombre }}
+                                </td>
+                                <td width="15%">
+                                    {{ estado.fecha }}
+                                </td>
+                                <td width="15%">
+                                    {{ estado.estado }}
+                                </td>
+                                <td width="15%">
+                                    {{ estado.usuario }}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </ng-template>
+         </p-dataTable>
+         <br/>
+         <span class="titulo2">Archivos para Cargar:</span>
+         <p-dataTable [value]="processData" rows="10" sortField = "nombre" [paginator]="true" [responsive]="true">
+            <p-column field="tipo" header="Tipo Archivo"  [style]="{'width':'23%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="nombre" header="Nombre Archivo"  [style]="{'width':'40%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha FTP"  [style]="{'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="estado" header="Estatus"  [style]="{'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="valor" header="Progreso"  [style]="{'font-size': '12px'}" [sortable]="true">
+                <ng-template let-rowSel="rowData" pTemplate="body">
+                    <p-progressBar [value]="rowSel.valor"></p-progressBar>
+                </ng-template>
+            </p-column>
+         </p-dataTable>
+         <br/>
+         <div class="btns">
+             <button class="btn btn-primary btn-sm" [disabled]="bloqueado" type="button" name="search" (click)="cargar()"> Cargar </button>
+         </div>
+    </div>
+</div>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>

@@ -1,0 +1,27 @@
+
+/deep/.ui-growl {
+    top:55px;
+}
+form {
+    font-size: 12px;
+}
+form>.btns {
+    margin-right: 15px;
+}
+
+.btns {
+    text-align: right;
+}
+.titulo2 {
+    font-family: arial;
+  	font-weight: bold;
+    font-size: 13px;
+	text-align: left;
+}
+.tab-detail {
+    font-family: arial;
+    font-size: 11px;
+    text-align: left;
+    margin: 0px 0px 0px 0px;
+    width: 100%;
+}

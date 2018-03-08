@@ -1,0 +1,16 @@
+.btns {
+    text-align: right;
+    margin-right: 25px;
+}
+
+form {
+    font-size: 12px;
+}
+
+.titulo {
+    font-family: arial;
+  	font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+    margin-bottom: 6px;
+}

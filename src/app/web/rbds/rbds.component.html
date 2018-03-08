@@ -1,0 +1,68 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form #rbdsForm="ngForm" class="form-horizontal">
+             <div class="col-md-6 col-lg-6">
+                 <div class= "form-group">
+                    <label for= "rbd" class="control-label col-md-2 col-lg-2">RBD</label>
+                    <div class="col-md-10 col-lg-10">
+                        <input class="form-control input-sm" type="text" name="rbd" [(ngModel)]="filtro.rbd" />
+                    </div>
+                </div>
+                <div class= "form-group">
+                    <label class= "control-label col-md-2 col-lg-2" for= "nombre">Nombre</label>
+                    <div class="col-md-10 col-lg-10">
+                        <input class="form-control input-sm" type="text" name="nombre" [(ngModel)]="filtro.nombre" />
+                    </div>
+                </div>
+             </div>
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label class= "control-label col-md-2 col-lg-2" for= "region">Region</label>
+                    <div class="col-md-10 col-lg-10">
+                        <select #sel [(ngModel)]= "filtro.region" (change)= "change(sel)" id="region" name="region" class="form-control input-sm"> 
+                            <option value=''>- SELECCIONE -</option>
+                            <option *ngFor= "let region of regiones" [value]="region.regionId">{{region.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class= "form-group">
+                    <label class= "control-label col-md-2 col-lg-2" for= "comuna">Comuna</label>
+                    <div class="col-md-10 col-lg-10">
+                        <select [(ngModel)]= "filtro.comuna" id="comuna" name="comuna" class="form-control input-sm"> 
+                            <option value=''>- SELECCIONE -</option>
+                            <option *ngFor= "let comuna of region.comunas" [value]="comuna.comunaId">{{comuna.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-warning btn-sm" type="button" name="new" (click)="newRowData()" data-toggle="modal" data-target="#myModal"> Nuevo</button>
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="loadDataFiltered()"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+       <p-dataTable [value]="data" [lazy]="true" [rows]="rows" sortField = "rbd" [paginator]="true" [totalRecords]="totalRecords"
+            [responsive]="true" (onLazyLoad)="loadDataLazy($event)">
+            <p-column field= "rbd" header="RBD" [style]="{'width':'10%', 'font-size': '12px', 'text-align': 'right'}" [sortable]="true"></p-column>
+            <p-column field= "nombre" header="Nombre Establecimiento"  [style]="{'width':'33%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "nAlumnos" header="N° Alumnos" [style]="{'width':'11%', 'font-size': '12px', 'text-align': 'right'}" [sortable]="true"></p-column>
+            <p-column field= "comuna.nombre" header="Comuna" [style]="{'width':'20%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "comuna.region.nombre" header="Región" [style]="{'width':'21%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'11%', 'text-align': 'center'}">
+                <ng-template pTemplate="header">
+                </ng-template>
+                <ng-template let-rbd="rowData" pTemplate="body">
+                    <button type="button" (click)="getContactos(rbd)" class="btn btn-link btn-xs"  data-toggle="tooltip" title="Ver Contactos"><i class="fa fa-id-card" aria-hidden="true"></i></button>
+                    <button type="button" (click)="editRowData(rbd)" class="btn btn-link btn-xs"  data-toggle="tooltip" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></button>
+                    <button type="button" (click)="deleteRowData(rbd)" class="btn btn-link btn-xs"  data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+<rbds-form [title] = "titleAction" [regiones] = "regiones" [region] = "regionSel" [rbd]="rbd" (close)="onClose($event)"></rbds-form>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>
+<p-confirmDialog header="Eliminar registro" icon="fa fa-question-circle" width="425"></p-confirmDialog>

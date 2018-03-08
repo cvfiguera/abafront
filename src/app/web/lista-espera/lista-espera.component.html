@@ -1,0 +1,56 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "operadora" class="control-label col-md-2 col-lg-2">Operadora</label>
+                    <div class="col-md-10 col-lg-10">
+                        <select #operadora name="operadora" class="form-control input-sm"> 
+                            <option value=null>- SELECCIONE -</option>
+                            <option *ngFor= "let operadora of operadoras"  [value]="operadora.operadoraId">{{operadora.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "rbd" class="control-label col-md-2 col-lg-2">RBD</label>
+                    <div class="col-md-10 col-lg-10">
+                        <input class="form-control input-sm" type="text" name="rbd" #rbd />
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-warning btn-sm" type="button" name="new" (click)="newRowData()" data-toggle="modal" data-target="#myModal"> Nuevo</button>
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="loadDataFiltered(operadora, rbd)"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+       <p-dataTable [value]="data" [rows]="10" sortField = "operadora" [paginator]="true" [responsive]="true">
+            <p-column field= "operadora" header="Operadora"  [style]="{'width':'30%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "rbd" header="RBD"  [style]="{'width':'10%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "tecnologia" header="Tecnología"  [style]="{'width':'17%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "velocidadBajada" header="V. Bajada"  [style]="{'width':'15%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "velocidadSubida" header="V. Subida"  [style]="{'width':'15%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "precio" header="Precio"  [style]="{'width':'15%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column styleClass="col-button" [style]="{'width':'8%', 'text-align': 'center'}">
+                <ng-template pTemplate="header"></ng-template>
+                <ng-template let-listae="rowData" pTemplate="body">
+                    <button type="button" (click)="editRowData(listae)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></button>
+                    <button type="button" (click)="deleteRowData(listae)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+    <div class="cont-icon">
+         <a class="s-font" [routerLink]= "['/web/tipos']"> <i class="fa fa-arrow-left"> Volver</i></a>
+    </div>
+</div>
+<listase-form [title] = "title" [lista]="lista" [id]= "id" [tecnologias] = "tecnologias" [operadoras] = "operadoras" (close)="onClose($event)"></listase-form>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>
+<p-confirmDialog header="Eliminar registro" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+

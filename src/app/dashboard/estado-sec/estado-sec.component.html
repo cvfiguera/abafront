@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Ultimos procesos</div>
+    <div class="panel-body">
+        <table class="table text-centered">
+            <thead>
+                <tr>
+                    <th>Proceso</th>
+                    <th>Operadora</th>
+                    <th>Usuario</th>
+                    <th>Periodo</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let proceso of procesos">
+                    <td>{{ proceso.proceso }}</td>
+                    <td>{{ proceso.operadora }}</td>
+                    <td>{{ proceso.usuario }}</td>
+                    <td>{{ proceso.mes + " - " + proceso.ano }}</td>
+                    <td><p-inputSwitch onLabel="Activo" offLabel="Inactivo" [(ngModel)]="proceso.estado"></p-inputSwitch></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

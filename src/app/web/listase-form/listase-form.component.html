@@ -1,0 +1,48 @@
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class= "form-group">
+                    <label for= "operadora">Operadora</label>
+                    <select [(ngModel)]= "lista.operadoraId" name="operadora" class="form-control input-sm"> 
+                        <option value=null>- SELECCIONE -</option>
+                        <option *ngFor= "let operadora of operadoras" [value]="operadora.id">{{operadora.nombre}}</option>
+                    </select>
+                </div>
+                <div class= "form-group">
+                    <label for= "rbd">RBD</label>
+                    <input class="form-control input-sm" type="number" name="rbd" [(ngModel)]= "lista.rbd" />
+                </div>
+                <div class= "form-group">
+                    <label for= "tecnologia">Tecnologia</label>
+                    <select [(ngModel)]= "lista.tecnologiaId" name="tecnologia" class="form-control input-sm"> 
+                        <option value=null>- SELECCIONE -</option>
+                        <option *ngFor= "let tecnologia of tecnologias" [value]="tecnologia.id">{{tecnologia.name}}</option>
+                    </select>
+                </div>
+                <div class= "form-group">
+                    <label for= "vSubida">Velocidad Subida</label>
+                    <input class="form-control input-sm" type="text" name="vSubida" [(ngModel)]= "lista.velocidadSubida" />
+                </div>
+                <div class= "form-group">
+                    <label for= "vBajada">Velocidad Bajada</label>
+                    <input class="form-control input-sm" type="text" name="vBajada" [(ngModel)]= "lista.velocidadBajada" />
+                </div>
+                <div class= "form-group">
+                    <label for= "precio">Precio</label>
+                    <input class="form-control input-sm" type="text" name="precio" [(ngModel)]= "lista.precio" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" name="cancel" data-toggle="modal" data-target="#myModal"> Cancelar</button>
+                <button class="btn btn-primary" type="button" name="save" (click)="save()" data-toggle="modal" data-target="#myModal"> Guardar</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+  <p-schedule [events]="events" [header]="header" [editable]="true"
+    [eventLimit]="4" [contentHeight]="470" [eventLimit]="4"
+     (onDayClick)="handleDayClick($event, button)" (onEventClick)="handleEventClick($event, button)"></p-schedule>
+</div>
+<feriados-form [title]="title" [feriado]="feriado" (close)="onClose($event)"> </feriados-form>
+<button #button [hidden]="true" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>
+

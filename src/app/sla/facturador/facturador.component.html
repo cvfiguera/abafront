@@ -1,0 +1,70 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "concurso" class="control-label col-md-3 col-lg-3">Concurso</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]= "filtro.concurso" name="concurso" class="form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let concurso of concursos" [value]="concurso.concursoId">{{concurso.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class= "form-group">
+                    <label for= "operadora" class="control-label col-md-3 col-lg-3">Operadora</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]= "filtro.operadora" name="operadora" class="form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let operadora of operadoras" [value]="operadora.id">{{operadora.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "month" class="control-label col-md-3 col-lg-3">Mes</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]= "filtro.mes" name= "month" class= "form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let month of months" [value]="month.id">{{month.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-lg-2">
+                <div class= "form-group">
+                    <label for= "year" class="control-label col-md-3 col-lg-3">Año</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]="filtro.year" name="year" class="form-control input-sm">
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let year of years" [value]="year.id">{{year.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary btn-sm" type="button" (click)="getFiles()" name="search"> <i class="fa fa-search" aria-hidden="true"></i> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+        <p-dataTable [value]="data" rows="10" sortField = "nombre" [paginator]="true" [responsive]="true">
+            <p-column field="tipo" header="Tipo"  [style]="{'font-size': '12px', 'width': '22%'}" [sortable]="true"></p-column>
+            <p-column field="nombre" header="Nombre"  [style]="{'font-size': '12px', 'width': '40%'}" [sortable]="true"></p-column>
+            <p-column field="version" header="Version"  [style]="{'font-size': '12px','width': '8%', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha"  [style]="{'font-size': '12px', 'width': '15%', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="estado" header="Estado"  [style]="{'font-size': '12px', 'width': '15%'}" [sortable]="true"></p-column>
+        </p-dataTable>
+        <br/>
+        <div class="btns">
+                <button class="btn btn-warning btn-sm" type="button" name="search" (click)="calcular()" [disabled]="bloqueado"> <i class="fa fa-calculator" aria-hidden="true"></i> Calcular </button>
+            <button class="btn btn-primary btn-sm" type="button" name="search" (click)="facturar()" [disabled]="bloqueado"> <i class="fa fa-file" aria-hidden="true"></i> Facturar </button>
+        </div>
+    </div>
+</div>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>

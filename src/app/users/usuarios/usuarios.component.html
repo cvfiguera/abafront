@@ -1,0 +1,54 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "rut" class="control-label col-md-2 col-lg-2">RUT</label>
+                    <div class="col-md-10 col-lg-10">
+                        <input class="form-control input-sm" type="text" name="rut" #rut />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "nombre" class="control-label col-md-2 col-lg-2">Nombre</label>
+                    <div class="col-md-10 col-lg-10">
+                        <input class="form-control input-sm" type="text" name="nombre" #nombre />
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-warning btn-sm" type="button" name="new" (click)="newRowData()" data-toggle="modal" data-target="#myModal"> Nuevo</button>
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="loadDataFiltered(rut, nombre)"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+       <p-dataTable [value]="data" [rows]="10" sortField = "nombre" [paginator]="true" [responsive]="true">
+            <p-column field= "rut" header="RUT"  [style]="{'width':'12%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "nombre" header="Nombre"  [style]="{'width':'15%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "apellido" header="Apellidos"  [style]="{'width':'17%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "username" header="Usuario"  [style]="{'width':'12%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "email" header="Email"  [style]="{'width':'16%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field= "organizacion" header="Organización"  [style]="{'width':'17%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column styleClass="col-button" [style]="{'width':'11%', 'text-align': 'center'}">
+                <ng-template pTemplate="header"></ng-template>
+                <ng-template let-contacto="rowData" pTemplate="body">
+                    <button type="button" (click)="deleteRowData(contacto)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Restablecer contraseña"><i class="fa fa-key" aria-hidden="true"></i></button>
+                    <button type="button" (click)="editRowData(contacto)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></button>
+                    <button type="button" (click)="deleteRowData(contacto)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+    <div class="cont-icon">
+         <a class="s-font" [routerLink]= "['/usuario/roles', {sistema:sistema}]"> <i class="fa fa-arrow-left"> Volver</i></a>
+    </div>
+</div>
+<usuarios-form [title] = "title" [id]= "id" [sistema]="sistema" [usuario]="usuario" (close)="onClose($event)"></usuarios-form>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>
+<p-confirmDialog header="Eliminar registro" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+

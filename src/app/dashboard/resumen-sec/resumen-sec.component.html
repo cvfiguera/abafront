@@ -1,0 +1,9 @@
+<span class="titulo2">Período actual: {{ periodo }}</span>
+<p-dataTable [value]="data" rows="15" [responsive]="true" [expandableRows]="true">
+    <p-column field="operadora" header="Operadora"  [style]="{'font-size': '12px'}" ></p-column>
+    <p-column field="sftp" header="En SFTP"  [style]="{'font-size': '12px', 'text-align': 'center'}"></p-column>
+    <p-column field="validados" header="Validados"  [style]="{'font-size': '12px', 'text-align': 'center'}"></p-column>
+    <p-column field="cargados" header="Procesados"  [style]="{'font-size': '12px', 'text-align': 'center'}"></p-column>
+    <p-column field="facturados" header="Facturados"  [style]="{'font-size': '12px', 'text-align': 'center'}"></p-column>
+</p-dataTable>
+<br/>

@@ -1,0 +1,41 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+             <div class="col-md-8 col-lg-8">
+                <div class= "form-group">
+                    <label class= "control-label col-md-4 col-lg-4" for= "nombre">Nombre</label>
+                    <div class="col-md-8 col-lg-8">
+                        <input class="form-control input-sm" type="text" name="nombre" #nombre />
+                    </div>
+                </div>
+             </div>
+            <div class="btns">
+                <button class="btn btn-warning btn-sm" type="button" name="new" (click)="newRowData()" data-toggle="modal" data-target="#myModal"> Nuevo</button>
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="loadDataFiltered(nombre)"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+       <p-dataTable [value]="data" [rows]="10" sortField = "nombre" [paginator]="true" [responsive]="true">
+            <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [style]="{'font-size': '12px'}"></p-column>
+            <p-column [style]="{'width':'11%', 'text-align': 'center'}">
+                <ng-template pTemplate="header">
+                </ng-template>
+                <ng-template let-rol="rowData" pTemplate="body">
+                    <button type="button" *ngIf = "tipo==1" (click)="getRoles(rol)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Ver Roles"><i class="fa fa-id-card-o" aria-hidden="true"></i></button>
+                    <button type="button" *ngIf = "tipo==2" (click)="getUsuarios(rol)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Ver Usuarios"><i class="fa fa-user-o" aria-hidden="true"></i></button>
+                    <button type="button" *ngIf = "tipo==2" (click)="editRowData(rol)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil-square-o" aria-hidden="true" data-toggle="modal" data-target="#myModal"></i></button>
+                    <button type="button" *ngIf = "tipo==2" (click)="deleteRowData(rol)" class="btn btn-link btn-xs" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+        <div class="cont-icon" *ngIf = "tipo==2">
+                <a class="s-font" (click)="getSistemas()"> <i class="fa fa-arrow-left"> Volver</i></a>
+        </div>
+    </div>
+</div>
+<roles-form [title] = "title" [rol]="rol" [sistema] = "sistema" (close)="onClose($event)"></roles-form>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>
+<p-confirmDialog header="Eliminar registro" icon="fa fa-question-circle" width="425"></p-confirmDialog>

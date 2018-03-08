@@ -1,0 +1,58 @@
+<div class="navbar-fixed-left">
+    <ul class="nav nav-stacked">
+			<li><a data-toggle="collapse" data-target="#menu1" class="st-font">
+					Cumplimiento SLA <i class="glyphicon glyphicon-chevron-down"></i>
+			</a>
+				<ul class="nav nav-stacked collapse in" id="menu1">
+					<li><a [routerLink]="['/sla/validacion']"  class="s-font"><i class="glyphicon glyphicon-flash"></i>
+							Validación de archivos</a></li>
+					<li><a [routerLink]="['/sla/carga']" class="s-font"><i class="glyphicon glyphicon-link"></i>
+							Carga de archivos</a></li>
+					<li><a [routerLink]="['/sla/bitacora']"  class="s-font"><i class="glyphicon glyphicon-briefcase"></i>
+						Bitacora</a></li>
+					<li><a [routerLink]="['/sla/facturacion']"  class="s-font"><i class="glyphicon glyphicon-file"></i>
+							Facturación</a></li>
+					<li><a [routerLink]="['/sla/procesos']" class="s-font"><i class="glyphicon glyphicon-menu-hamburger"></i>
+							Procesos</a></li>
+				</ul></li>
+		</ul>
+		<ul class="nav nav-stacked">
+				<li><a data-toggle="collapse" data-target="#menu2" class="st-font">
+						Facturaciones Históricas <i class="glyphicon glyphicon-chevron-down"></i>
+				</a>
+					<ul class="nav nav-stacked collapse in" id="menu2">
+						<li><a [routerLink]="['/facturaciones/operadoras']"  class="s-font"><i class="glyphicon glyphicon-flash"></i>
+								Por Operadoras</a></li>
+						<li><a [routerLink]="['/facturaciones/rbds']" class="s-font"><i class="glyphicon glyphicon-link"></i>
+								Por Rbds</a></li>
+						<li><a [routerLink]="['/facturaciones/promedios']"  class="s-font"><i class="glyphicon glyphicon-briefcase"></i>
+								Promedios de Facturaciones</a></li>
+					</ul></li>
+			</ul>
+		<ul class="nav nav-stacked">
+			<li><a data-toggle="collapse" data-target="#menu3" class="st-font"> 
+					Aba Web <i class="glyphicon glyphicon-chevron-down"></i>
+			</a>
+				<ul class="nav nav-stacked collapse in" id="menu3">
+					<li><a [routerLink]="['/web/estados']" class="s-font"><i class="glyphicon glyphicon-transfer"></i>
+							Estados RBDs</a></li>
+					<li><a [routerLink]="['/web/tecnologias']" class="s-font"><i class="glyphicon glyphicon-signal"></i>
+							Tecnologías</a></li>
+							<li><a a [routerLink]="['/web/tipos']"  class="s-font"><i class="glyphicon glyphicon-list-alt"></i>
+							Listas de Espera</a></li>
+					<li><a href="#" class="s-font"><i class="glyphicon glyphicon-map-marker"></i>
+							Regiones y Comunas</a></li>
+				</ul></li>
+		</ul>
+		<ul class="nav nav-stacked">
+			<li><a data-toggle="collapse" data-target="#menu4" class="st-font">
+					Tickets <i class="glyphicon glyphicon-chevron-down"></i>
+				</a>
+				<ul class="nav nav-stacked collapse in" id="menu4">
+					<li><a href="#" class="s-font"><i class="glyphicon glyphicon-cog"></i>
+							Base de datos Ticket</a></li>
+				</ul>
+			</li>
+		</ul>
+</div>
+

@@ -1,0 +1,22 @@
+th {
+    padding: 4px;
+    text-align: left;
+    font-family: arial;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+}
+td {
+    padding: 4px;
+    font-size: 11px;
+}
+.panel-heading {
+    font-family: arial;
+    font-weight: bold;
+    font-size: 13px;
+    text-align: left;
+}
+.table {
+    margin: 0px 0px 0px 0px;
+    margin-bottom: 0px 0px 0px 0px;
+}

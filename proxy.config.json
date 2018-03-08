@@ -1,0 +1,27 @@
+{
+    "/aba/*": {
+        "target": "http://192.168.0.221:8080",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/sftp_ws/*": {
+        "target": "http://192.168.0.221:8080",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/carga/*": {
+        "target": "http://192.168.0.221:8080",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/validar_ws/*": {
+        "target": "http://192.168.0.221:8080",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/CalculosWS/*": {
+        "target": "http://localhost:8080/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

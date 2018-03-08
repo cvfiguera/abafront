@@ -1,0 +1,60 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "operadora" class="control-label col-md-2 col-lg-2">Operadora</label>
+                    <div class="col-md-10 col-lg-10">
+                        <select [(ngModel)]= "filtro.operadora" name="operadora" class="form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let operadora of operadoras" [value]="operadora.nombre">{{operadora.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "month" class="control-label col-md-3 col-lg-3">Mes</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]= "filtro.mes" name= "month" class= "form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let month of months" [value]="month.id">{{month.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "year" class="control-label col-md-3 col-lg-3">Año</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]="filtro.year" name="year" class="form-control input-sm">
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let year of years" [value]="year.id">{{year.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary btn-sm" type="button" name="search" [disabled]="bloqueadoV" (click)="getFiles()"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+        <p-dataTable [value]="data" rows="10" sortField = "nombre" [paginator]="true" [responsive]="true"
+            [selectionMode]="selectionMode" [(selection)]="processData">
+            <p-column field="tipoArchivo" header="Tipo Archivo"  [style]="{'width':'23%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="archivo" header="Nombre Archivo"  [style]="{'width':'40%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="version" header="Versión"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+            <p-column field="estatus" header="Estatus"  [style]="{'font-size': '12px', 'text-align': 'center'}" [sortable]="true"></p-column>
+         </p-dataTable>
+         <br/>
+         <div class="btns">
+             <button class="btn btn-primary btn-sm" [disabled]="bloqueadoV" type="button" name="search" (click)="procesar(1)"> Validar </button>
+             <button class="btn btn-warning btn-sm" [disabled]="bloqueadoC" type="button" name="search" (click)="procesar(2)"> Cargar </button>
+         </div>
+    </div>
+</div>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>

@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Eventos del mes</div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Motivo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="feriados">
+                        <td colspan="2">No hay feriados para el período</td>
+                </tr>
+                <tr *ngFor="let feriado of feriados">
+                    <td>{{ feriado.start }}</td>
+                    <td>{{ feriado.title }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

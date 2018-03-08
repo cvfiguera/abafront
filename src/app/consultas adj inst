@@ -1,0 +1,15 @@
+//adjudicaciones
+select distinct rbd_id, concurso_id, operadora_id, tecnologia_id, precio_adjudicacion_nu, velocidad_nacional_nu,
+velocidad_internacional_nu, fecha_adjudicacion, fecha_desadjudicacion from web.adjudicaciones a inner join 
+web.rbd_concursos rc on (a.rbd_concurso_id = rc.rbd_concurso_id), (select adjudicaciones.rbd_concurso_id, max(adjudicaciones.fecha_adjudicacion) as fecha 
+from web.adjudicaciones where operadora_id = 13 group by adjudicaciones.rbd_concurso_id) a_max 
+where (a.rbd_concurso_id = a_max.rbd_concurso_id) or (fecha_adjudicacion >= '2017-12-01' and fecha_adjudicacion <= '2017-12-31') 
+or (fecha_desadjudicacion >= '2017-12-01' and fecha_desadjudicacion <= '2017-12-31')
+
+//instalaciones
+select distinct rbd_id, concurso_id, fecha_alta_servicio_fe, fecha_desintalacion_fe, tecnologia_id, precio_instalacion_decimal, 
+velocidad_nacional_nu, velocidad_internacional_nu, instalacion_excepcion_id from web.instalaciones i inner join 
+web.rbd_concursos rc on (i.rbd_concurso_id = rc.rbd_concurso_id), (select rbd_concurso_id, max(fecha_alta_servicio_fe) as fecha from web.instalaciones where operadora_id = 13
+group by rbd_concurso_id) i_max where (i.rbd_concurso_id = i_max.rbd_concurso_id and i.fecha_alta_servicio_fe = i_max.fecha)
+or (i.fecha_alta_servicio_fe >= '2017-12-1' and i.fecha_alta_servicio_fe <= '2017-12-31')
+or (i.fecha_desintalacion_fe >= '2017-12-1' and i.fecha_desintalacion_fe <= '2017-12-31')

@@ -1,0 +1,11 @@
+.ui-grid-row div {
+    padding: 4px 10px
+}
+        
+.ui-grid-row div label {
+    font-weight: bold;
+}
+
+/deep/.ui-growl {
+    top:55px;
+}

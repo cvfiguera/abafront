@@ -1,0 +1,75 @@
+<header-page [title] = "titlePage"> </header-page>
+<div class= "bodyPage">
+    <div class= "search">
+        <form class="form-horizontal">
+            <div class="col-md-6 col-lg-6">
+                <div class= "form-group">
+                    <label for= "operadora" class="control-label col-md-2 col-lg-2">Operadora</label>
+                    <div class="col-md-10 col-lg-10">
+                        <select [(ngModel)]= "filtro.operadora" name="operadora" class="form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let operadora of operadoras" [value]="operadora.nombre">{{operadora.nombre}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "month" class="control-label col-md-3 col-lg-3">Mes</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]= "filtro.mes" name= "month" class= "form-control input-sm"> 
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let month of months" [value]="month.id">{{month.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <div class= "form-group">
+                    <label for= "year" class="control-label col-md-3 col-lg-3">Año</label>
+                    <div class="col-md-9 col-lg-9">
+                        <select [(ngModel)]="filtro.year" name="year" class="form-control input-sm">
+                            <option value= "null">- SELECCIONE -</option>
+                            <option *ngFor= "let year of years" [value]="year.id">{{year.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn btn-primary btn-sm" type="button" name="search" (click)="getFiles()" [disabled]="bloqueado"> Buscar</button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div class= "search-results">
+         <p-dataTable [value]="data" rows="10" sortField = "nombre" [paginator]="true" [responsive]="true"
+             [selectionMode]="selectionMode" [(selection)]="processData" (onHeaderCheckboxToggle)="selectAll()" (onRowSelect)="onRowSelect($event)">
+            <p-column field="archivo" header="Nombre Archivo"  [style]="{'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha"  [style]="{'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+         </p-dataTable>
+         <br/>
+         <span class="titulo2">Archivos para Validar:</span>
+         <p-dataTable [value]="processData" rows="10" sortField = "nombre" [paginator]="true" [responsive]="true">
+            <p-column field="archivo" header="Nombre Archivo"  [style]="{'width':'40%', 'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="fecha" header="Fecha"  [style]="{'font-size': '12px'}" [sortable]="true"></p-column>
+            <p-column field="validar" header="Reprocesar" [style]="{'text-align': 'center'}">
+                <ng-template let-proceso="rowData" pTemplate="body">
+                    <p-inputSwitch *ngIf = "proceso.procesado" onLabel="Si" offLabel="No" [(ngModel)]="proceso.validar"></p-inputSwitch>
+                </ng-template>
+            </p-column>
+            <p-column styleClass="col-button" [sortable]="true" [style]="{'width':'10%','font-size': '12px'}">
+                <ng-template pTemplate="header">Estado</ng-template>
+                <ng-template let-proceso="rowData" pTemplate="body">
+                    {{ proceso.termino==1?'Procesado':'No Procesado'}}
+                </ng-template>
+            </p-column>
+            <p-column field="estado" header="Mensaje"  [style]="{'font-size': '12px'}" [sortable]="true"></p-column>
+         </p-dataTable>
+         <br/>
+         <div class="btns">
+             <button class="btn btn-primary btn-sm" type="button" name="search" (click)="validar()" [disabled]="bloqueado"> Validar </button>
+         </div>
+    </div>
+</div>
+<p-growl [(value)]= "msgs" [life]= "3000"></p-growl>

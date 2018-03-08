@@ -1,0 +1,52 @@
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <form>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class= "form-group">
+                    <label for= "rbd">RBD</label>
+                    <input class="form-control input-sm" type="text" name="rbd" [(ngModel)]= "rbd.rbd" />
+                </div>
+                <div class= "form-group">
+                    <label for= "nombre">Nombre Establecimiento</label>
+                    <input class="form-control input-sm" type="text" name="nombre" [(ngModel)]= "rbd.nombre" />
+                </div>
+                <div class= "form-group">
+                    <label for= "direccion">Dirección</label>
+                    <input class="form-control input-sm" type="text" name="direccion" [(ngModel)]= "rbd.direccion" />
+                </div>
+                <div class= "form-group">
+                    <label for= "nalumnos">Número de Alumnos</label>
+                    <input class="form-control input-sm" type="text" name="nalumnos" [(ngModel)]= "rbd.nAlumnos" />
+                </div>
+                <div class= "form-group">
+                    <label for= "observacion">Observación</label>
+                    <input class="form-control input-sm" type="text" name="observacion" [(ngModel)]= "rbd.observacion" />
+                </div>
+                <div class= "form-group">
+                    <label for= "region">Región</label>
+                    <select #selected [(ngModel)]= "rbd.comuna.region.regionId" (change)= "changeMod(selected)" id="region" name="region" class="form-control input-sm"> 
+                        <option value=null>- SELECCIONE -</option>
+                        <option *ngFor= "let region of regiones" [value]="region.regionId">{{region.nombre}}</option>
+                    </select>
+                </div>
+                <div class= "form-group">
+                    <label for= "observacion">Comuna</label>
+                    <select [(ngModel)]= "rbd.comuna.comunaId" id="comuna" name="comuna" class="form-control input-sm"> 
+                        <option value=null>- SELECCIONE -</option>
+                        <option *ngFor= "let comuna of region.comunas" [value]="comuna.comunaId">{{comuna.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning" type="button" name="cancel" data-toggle="modal" data-target="#myModal"> Cancelar</button>
+                <button class="btn btn-primary" type="button" name="save" (click)="save()" data-toggle="modal" data-target="#myModal"> Guardar</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

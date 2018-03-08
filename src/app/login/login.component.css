@@ -1,0 +1,21 @@
+/******************************LOGIN-PAGE*****************************/
+.login h5 {
+    font-family: arial;
+  	font-weight: bold;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 1);
+  	letter-spacing:1pt;
+    text-align: center;
+}
+.login label {
+     color: rgba(255, 255, 255, 1);
+}
+.login {
+    width: 40%;
+    background-color: rgba(0, 0, 20, 0.85);
+    margin-top: 30px;
+    padding-top: 20px;
+}
+.login .form-button {
+    text-align: right;
+}
